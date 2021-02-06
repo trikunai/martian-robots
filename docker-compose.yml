@@ -14,6 +14,7 @@ services:
       - DATABASE_PORT=5432
       - GRID_MAX_X=50
       - GRID_MAX_Y=50
+      - MAX_ORDERS_PER_ROBOT=100
     depends_on:
       - postgres
     ports:
