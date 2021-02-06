@@ -13,6 +13,18 @@ const GridStats = sequelize.define('grid_stats', {
         type: Sequelize.INTEGER(11),
         allowNull: true,
     },
+    totalRightMovements: {
+        type: Sequelize.INTEGER(11),
+        allowNull: true,
+    },
+    totalLeftMovements: {
+        type: Sequelize.INTEGER(11),
+        allowNull: true,
+    },
+    totalLostRobots: {
+        type: Sequelize.INTEGER(11),
+        allowNull: true,
+    },
 }, {
     tableName: 'Grid_stats',
     timestamps: true,

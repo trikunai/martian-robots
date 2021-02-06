@@ -15,7 +15,7 @@ const Robot = sequelize.define('robot', {
         allowNull: false,
     },
     start_orientation: {
-        type: Sequelize.INTEGER(1),
+        type: Sequelize.STRING(10),
         allowNull: false,
     },
     end_coordinates: {
@@ -23,7 +23,15 @@ const Robot = sequelize.define('robot', {
         allowNull: false,
     },
     end_orientation: {
-        type: Sequelize.INTEGER(1),
+        type: Sequelize.STRING(10),
+        allowNull: false,
+    },
+    orders: {
+        type: Sequelize.ARRAY(Sequelize.STRING(100)),
+        allowNull: false,
+    },
+    lost: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
     }
 }, {
@@ -36,6 +44,11 @@ Robot.belongsTo(Grid, {
 });
 
 Robot.belongsTo(Scent, {
+    foreignKey: 'idScent',
+    allowNull: true,
+});
+
+Scent.hasOne(Robot, {
     foreignKey: 'idScent',
     allowNull: true,
 });

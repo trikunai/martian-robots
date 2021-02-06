@@ -18,7 +18,7 @@ const Scent = sequelize.define('scent', {
         allowNull: false,
     },
     orientation: {
-        type: Sequelize.INTEGER(1),
+        type: Sequelize.STRING(1),
         allowNull: false,
     }
 }, {

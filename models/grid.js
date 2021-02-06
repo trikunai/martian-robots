@@ -18,6 +18,12 @@ const Grid = sequelize.define('grid', {
 }, {
     tableName: 'Grids',
     timestamps: true,
+    indexes: [
+        {
+            unique: true,
+            fields: ['x', 'y'],
+        },
+    ],
 });
 
 module.exports = Grid;
