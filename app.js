@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const database = require('./lib/database');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,7 +13,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// ---------- PG ------------
+try {
+	database.sequelize.authenticate().then(() => {
+		console.log("connected")
+		logger('Connected" to database successfully.');
+		database.updateDatabase();
+	}).catch((err) => {
+		logger(`Unable to connect to the database: ${err}`);
+	})
+} catch (err) { logger(`Unable to connect to the database: ${err}`); }
+// ------------------------------
 
 const robotsRouter = express.Router();
 require('./routes/robots')(robotsRouter);
