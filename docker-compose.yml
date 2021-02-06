@@ -1,0 +1,44 @@
+version: "2"
+services:
+  api:
+    command: ["npm", "run", "dev"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+      - DATABASE=martianrobots
+      - DATABASE_PASSWORD=1234
+      - DATABASE_URL=postgres
+      - DATABASE_USERNAME=root
+      - DATABASE_PORT=5432
+      - GRID_MAX_X=50
+      - GRID_MAX_Y=50
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    networks:
+      - api_robots
+    volumes:
+      - .:/src
+      - /src/node_modules
+  postgres:
+    networks:
+      - api_robots
+    image: postgres:alpine
+    environment:
+      - TZ=Europe/Madrid
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=root
+      - POSTGRES_DB=martianrobots
+      - POSTGRES_INITDB_WALDIR=/data/wal/db
+      - PGDATA=/data/postgres/db
+    volumes:
+      - /mnt/data/postgres/robots:/data
+    ports:
+      - "5432:5432"
+networks:
+  api_robots:
+    driver: bridge
