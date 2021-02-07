@@ -40,7 +40,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
                 if (!newPosition) {
                     newPosition = robot;
                 }
-
+                // process move of the robot
                 newPosition = await Movements.move(newPosition.coordinates, newPosition.orientation, order, grid, persistData);
 
                 // sum robot move at stats
@@ -55,13 +55,16 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
             result = result + await Movements.encodeOrderString(newPosition.coordinates, newPosition.orientation, lost);
 
             if (persistData) {
+                // save robot data
                 let savedRobot = await Utils.saveRobot(grid[0], grid[1], robotStartCoordinates, robot.orientation, newPosition.coordinates, newPosition.orientation, robot.orders, lost);
 
                 // Save robot stats
 
                 if (savedRobot) {
+                    // save robot stats
                     const robotStat = await Utils.saveRobotStats(savedRobot.idRobot, robotStats);
                     robotStatsArray.push(robotStat);
+                    // update grid stats with current robot movements
                     gridStat = await Utils.updateGridStats(savedRobot.idGrid, robotStats, lost);
                 }
             }

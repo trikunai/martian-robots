@@ -1,4 +1,3 @@
-const Movements = require('../lib/movements');
 const Utils = require('./../lib/utils');
 const logger = require('morgan');
 

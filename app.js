@@ -76,8 +76,6 @@ app.use(
 	swaggerUi.serve,
 	swaggerUi.setup(specs, { explorer: true })
 );
-// router.use('/api-docs', swaggerUi.serve);
-// router.get('/api-docs', swaggerUi.setup(specs, { explorer: true }));
 
 app.listen(port, () => {
 	logger(`API service running on port ${port}!`);
