@@ -25,6 +25,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
         const robotStatsArray = [];
         let gridStat;
         for (const robot of robots) {
+            const robotStartCoordinates = [...robot.coordinates];
             let newPosition;
             let robotStats = {
                 R: 0, L: 0, F: 0
@@ -48,7 +49,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
             result = result + await Movements.encodeOrderString(newPosition.coordinates, newPosition.orientation, lost);
 
             if (persistData) {
-                let savedRobot = await Utils.saveRobot(grid[0], grid[1], robot.coordinates,robot.orientation,newPosition.coordinates,newPosition.orientation, robot.orders, lost);
+                let savedRobot = await Utils.saveRobot(grid[0], grid[1], robotStartCoordinates, robot.orientation, newPosition.coordinates, newPosition.orientation, robot.orders, lost);
 
                 // Save robot stats
 
