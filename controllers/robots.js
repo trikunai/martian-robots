@@ -3,6 +3,7 @@ const Utils = require('./../lib/utils');
 const logger = require('morgan');
 const maxOrdersPerRobot = process.env.MAX_ORDERS_PER_ROBOT || 100;
 const persistData = process.env.PERSIST_DATA && process.env.PERSIST_DATA == 'true'|| false;
+
 const execute = (req, persistData = false) => new Promise(async (resolve, reject) => {
     try {
         const instructions = req.body.instructions.split("\n");

@@ -12,7 +12,6 @@ module.exports = (chai, url) => new Promise((resolve, reject) => {
                     if (err) {
                         reject(err);
                     } else {
-                        // console.log(res.text)
                         res.should.have.status(500);
                         resolve();
                     }
@@ -30,7 +29,6 @@ module.exports = (chai, url) => new Promise((resolve, reject) => {
                     if (err) {
                         reject(err);
                     } else {
-                        // console.log(res.text)
                         res.text.should.eql(`"Provided initial grid 'X' value is not a number"`)
                         res.should.have.status(500);
                         resolve();
