@@ -18,7 +18,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
             const coordinates = [parseInt(element.trim().split(' ')[0]), parseInt(element.trim().split(' ')[1])];
 
             if (await Movements.checkOutsideGrid(grid, coordinates)) {
-                throw new Error(`Robot can not be deployed outsie grid. Robot landed at [${coordinates.toString()}] outside grid [${grid.toString()}]`)
+                throw new Error(`Robot can not be deployed outside grid. Robot landed at [${coordinates.toString()}] outside grid [${grid.toString()}]`)
             }
             robots.push({
                 coordinates,
