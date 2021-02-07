@@ -62,7 +62,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
                 result = result + "\n";
             }
         }
-        resolve({result, gridStat, robotsStats: robotStatsArray});
+        resolve({output:result, gridStat, robotsStats: robotStatsArray});
     } catch (error) {
         reject(error);
     }
