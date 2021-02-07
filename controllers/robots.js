@@ -15,8 +15,13 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
             if (instructions[index+1].trim().length > maxOrdersPerRobot) {
                 throw new Error(`Max order/instruction per robot is set at ${maxOrdersPerRobot}. Total of ${instructions[index+1].trim().length} orders/instructions received.`)
             }
+            const coordinates = [parseInt(element.trim().split(' ')[0]), parseInt(element.trim().split(' ')[1])];
+
+            if (await Movements.checkOutsideGrid(grid, coordinates)) {
+                throw new Error(`Robot can not be deployed outsie grid. Robot landed at [${coordinates.toString()}] outside grid [${grid.toString()}]`)
+            }
             robots.push({
-                coordinates: [parseInt(element.trim().split(' ')[0]), parseInt(element.trim().split(' ')[1])],
+                coordinates,
                 orientation: element.trim().split(' ')[2],
                 orders: instructions[index+1].trim().split(''),
             })
