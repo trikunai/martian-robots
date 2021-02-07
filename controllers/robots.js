@@ -2,7 +2,7 @@ const Movements = require('../lib/movements');
 const Utils = require('./../lib/utils');
 const logger = require('morgan');
 const maxOrdersPerRobot = process.env.MAX_ORDERS_PER_ROBOT || 100;
-
+const persistData = process.env.PERSIST_DATA && process.env.PERSIST_DATA == 'true'|| false;
 const execute = (req, persistData = false) => new Promise(async (resolve, reject) => {
     try {
         const instructions = req.body.instructions.split("\n");
@@ -76,7 +76,7 @@ const execute = (req, persistData = false) => new Promise(async (resolve, reject
 
 exports.postRobots = async (req, res) => {
     try {
-        const result = await execute(req, true)
+        const result = await execute(req, persistData)
         res.status(200).json(result);
     } catch (error) {
         logger(error);
