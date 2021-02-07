@@ -90,7 +90,7 @@ module.exports = (router) => {
 	 *                  description: "grid, robots, movements instructions lines input"
      *     responses:
      *       200:
-     *         description: "An array of apps"
+     *         description: "Result"
 	 *         content:
      *           application/json:
      *             schema:

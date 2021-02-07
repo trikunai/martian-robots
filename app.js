@@ -31,6 +31,7 @@ try {
 
 const robotsRouter = express.Router();
 require('./routes/robots')(robotsRouter);
+require('./routes/stats')(robotsRouter);
 app.use('/api/', robotsRouter);
 
 app.use((req, res, next) => {
